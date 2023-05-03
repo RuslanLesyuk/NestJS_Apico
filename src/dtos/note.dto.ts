@@ -8,5 +8,5 @@ export class CreateNoteDTO {
     description: string;
 
     @ApiProperty()
-    tags: string;
+    tags: APICO;
 }
