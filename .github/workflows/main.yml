@@ -1,0 +1,32 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main # Replace with the branch you want to trigger the action on
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Login to AWS ECR
+      uses: aws-actions/amazon-ecr-login@v1
+      with:
+        aws-region: es-east-1
+        registry: aws-crud-ecr-repo
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: Build and tag Docker image
+      run: |
+        docker build -t aws-crud-ecr-repo:latest .
+        docker tag aws-crud-ecr-repo:latest 640172208265.dkr.ecr.us-east-1.amazonaws.com/aws-crud-ecr-repo:latest
+
+    - name: Push Docker image to ECR
+      run: docker push 640172208265.dkr.ecr.us-east-1.amazonaws.com/aws-crud-ecr-repo:latest
+    - name: Update ECS service
+      run: |
+        aws ecs update-service --cluster aws-crud-cluster --service aws-crud-service --force-new-deployment
