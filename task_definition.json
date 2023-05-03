@@ -1,0 +1,55 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:640172208265:task-definition/aws-crud-task:5",
+    "containerDefinitions": [
+        {
+            "name": "aws-crud-container",
+            "image": "640172208265.dkr.ecr.us-east-1.amazonaws.com/aws-crud-ecr-repo",
+            "cpu": 256,
+            "memory": 512,
+            "portMappings": [
+                {
+                    "containerPort": 3000,
+                    "hostPort": 3000,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": []
+        }
+    ],
+    "family": "aws-crud-task",
+    "executionRoleArn": "arn:aws:iam::640172208265:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "revision": 5,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "256",
+    "memory": "512",
+    "registeredAt": "2023-05-03T16:31:31.502Z",
+    "registeredBy": "arn:aws:iam::640172208265:user/Terraform",
+    "tags": []
+}
