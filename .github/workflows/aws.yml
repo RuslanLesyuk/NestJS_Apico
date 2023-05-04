@@ -78,16 +78,6 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
     
-    - name: Build and push Docker image 
-      uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-        image: owico/aws-crud-ecr-repo
-        tags: 1.0.${{ github.run_number }}, latest
-        registry: ${{ secrets.DOCKER_REGISTRY }}
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_TOKEN }}
-        buildArgs: SOME_KEY=1
-    
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
@@ -98,6 +88,7 @@ jobs:
         # push it to ECR so that it can
         # be deployed to ECS.
         docker build -t 640172208265.dkr.ecr.us-east-1.amazonaws.com/aws-crud-ecr-repo:latest .
+        docker push owico/aws-crud-ecr-repo:latest
         docker push 640172208265.dkr.ecr.us-east-1.amazonaws.com/aws-crud-ecr-repo:latest
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
