@@ -88,7 +88,9 @@ jobs:
         # push it to ECR so that it can
         # be deployed to ECS.
         docker build -t 640172208265.dkr.ecr.us-east-1.amazonaws.com/aws-crud-ecr-repo:latest .
+        docker tag 640172208265.dkr.ecr.us-east-1.amazonaws.com/aws-crud-ecr-repo:latest owico/aws-crud-ecr-repo:latest
         docker push owico/aws-crud-ecr-repo:latest
+        docker tag owico/aws-crud-ecr-repo:latest 640172208265.dkr.ecr.us-east-1.amazonaws.com/aws-crud-ecr-repo:latest owico/aws-crud-ecr-repo:latest
         docker push 640172208265.dkr.ecr.us-east-1.amazonaws.com/aws-crud-ecr-repo:latest
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
