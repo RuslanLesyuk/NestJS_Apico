@@ -9,4 +9,7 @@ export class CreateNoteDTO {
 
     @ApiProperty()
     tags: strring;
+
+    @ApiProperty()
+    tags: string;	
 }
