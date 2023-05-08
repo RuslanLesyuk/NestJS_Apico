@@ -26,7 +26,7 @@ Use commands to:
 
 ```
 terraform init
-terraform apply
+terraform apply -auto-approve
 ```
 
 Wait a few minutes, terraform will build infrastracture for our applications.
