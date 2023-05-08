@@ -26,7 +26,6 @@ Use commands to:
 
 ```
 terraform init
-```
 terraform apply
 ```
 
